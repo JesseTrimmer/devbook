@@ -76,7 +76,7 @@ const cancelBooking = async (req, res) => {
 const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
-      .populate('client', 'name email company')
+      .populate('client', 'name email company phone')
       .populate('service', 'title category')
       .sort({ createdAt: -1 });
     res.json(bookings);
@@ -85,4 +85,22 @@ const getAllBookings = async (req, res) => {
   }
 };
 
-module.exports = { createBooking, getMyBookings, getBookingById, updateBookingStatus, cancelBooking, getAllBookings };
+const scheduleMeeting = async (req, res) => {
+  try {
+    const { date, time, notes } = req.body;
+    const booking = await Booking.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: 'meeting-scheduled',
+        meetingInfo: { date, time, notes, scheduledAt: new Date() }
+      },
+      { new: true }
+    ).populate('service client');
+    if (!booking) return res.status(404).json({ message: 'Booking not found' });
+    res.json(booking);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createBooking, getMyBookings, getBookingById, updateBookingStatus, cancelBooking, getAllBookings, scheduleMeeting };

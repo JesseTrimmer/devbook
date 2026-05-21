@@ -35,6 +35,12 @@ const bookingSchema = new mongoose.Schema({
     timeline: String,
     generatedAt: Date
   },
+  meetingInfo: {
+  date: String,
+  time: String,
+  notes: String,
+  scheduledAt: Date
+},
   totalPrice: {
     type: Number
   },
