@@ -365,7 +365,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
 }
 .home-services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 .home-service-card {
@@ -373,7 +373,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
   backdrop-filter: var(--blur);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 24px 20px;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
@@ -1072,3 +1072,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
   background: #0f1420;
   color: var(--text);
 }
+.home-service-card h3 { font-size: 16px; }
+.home-service-card p { font-size: 12px; }
+.home-service-price { font-size: 20px; }
+.home-service-num { font-size: 10px; margin-bottom: 12px; }

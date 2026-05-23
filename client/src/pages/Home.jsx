@@ -55,7 +55,7 @@ function Home() {
           <p>Everything from a simple landing page to a complex custom application.</p>
         </div>
         <div className="home-services-grid">
-          {services.slice(0, 3).map(s => (
+          {services.map(s => (
             <div key={s.num} className="home-service-card">
               <div className="home-service-num">{s.num}</div>
               <h3>{s.title}</h3>
