@@ -13,11 +13,19 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: [
-    process.env.CLIENT_URL,
-    'http://localhost:5173',
-    'http://localhost:3000'
-  ],
+  origin: function(origin, callback) {
+    const allowed = [
+      'https://devbook-rho.vercel.app',
+      'https://devbook-rho.vercel.app/',
+      'http://localhost:5173',
+      'http://localhost:3000'
+    ];
+    if (!origin || allowed.some(o => origin.startsWith(o.replace(/\/$/, '')))) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
